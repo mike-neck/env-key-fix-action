@@ -29,5 +29,6 @@ runs:
         env | grep "${word}" | grep -v "^WORD=" | while read line; do
           key=$(echo "${line}" | cut -d'=' -f1 | sed -e "s/_${word}//g" -e "s/${word}_//g")
           value=$(echo "${line}" | cut -d'=' -f2-)
+          echo "new env ${key}"
           echo "${key}=${value}" >> $GITHUB_ENV
         done
