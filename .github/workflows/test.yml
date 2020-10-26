@@ -18,7 +18,7 @@ jobs:
 
       - name: run check
         run: |
-          test -n "FOO"
-          test -n "BAR"
-          test -z "BAZ"
-          test -z "QUX"
+          test -n "${FOO}"
+          test -n "${BAR}"
+          test -z "${BAZ}"
+          test -z "${QUX}"
