@@ -1,0 +1,20 @@
+name: env-key-fix-action
+description: Fixes env key removing a specified word.
+branding:
+  icon: edit
+  color: purple
+inputs:
+  word:
+    description: Removing word(string)
+    required: true
+  ignore-case:
+    description: Ignoring case(boolean, default: true)
+runs:
+  using: composite
+  steps:
+    - name: Run
+      shell: bash
+      run: |
+        declare word
+        
+
