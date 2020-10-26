@@ -21,7 +21,7 @@ runs:
         declare word
         if [[ -z "${WORD}" ]] ; then
           exit 1
-        elif [[ -z "${IGNORE_CASE}" || "${IGNORE_CASE}" == "true" ]] then
+        elif [[ -z "${IGNORE_CASE}" || "${IGNORE_CASE}" == "true" ]] ; then
           word="${WORD^^}"
         else
           word="${WORD}"
