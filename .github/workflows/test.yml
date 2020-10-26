@@ -1,8 +1,8 @@
 name: test
 on: [push, workflow_dispatch]
 jobs:
-  test:
-    name: test
+  test-1:
+    name: test 1
     runs-on: ubuntu-20.04
     steps:
       - name: run action
@@ -18,7 +18,29 @@ jobs:
 
       - name: run check
         run: |
-          test -n "${FOO}"
-          test -n "${BAR}"
+          [[ "${FOO}" == "foo" ]]
+          [[ "${BAR}" == "bar" ]]
+          test -z "${BAZ}"
+          test -z "${QUX}"
+
+  test-2:
+    name: test 2
+    runs-on: ubuntu-20.04
+    steps:
+      - name: run action
+        uses: "mike-neck/env-key-fix-action@main"
+        with:
+          word: test
+          ignore-case: true
+        env:
+          TEST_FOO: foo
+          TEST_BAR: bar
+          PROD_BAZ: baz
+          PROD_QUX: qux
+
+      - name: run check
+        run: |
+          [[ "${FOO}" == "foo" ]]
+          [[ "${BAR}" == "bar" ]]
           test -z "${BAZ}"
           test -z "${QUX}"
