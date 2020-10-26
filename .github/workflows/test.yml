@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: run action
-        uses: "mike-neck/env-key-fix-action@${{ github.ref }}"
+        uses: "mike-neck/env-key-fix-action@main"
         with:
           word: test
           ignore-case: true
