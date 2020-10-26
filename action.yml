@@ -1,11 +1,11 @@
-name: env-key-fix-action
-description: Fixes env key removing a specified word.
+name: fix-profile-action
+description: Fixes env key removing a profile name.
 branding:
   icon: edit
   color: purple
 inputs:
-  word:
-    description: Removing word(string)
+  profile:
+    description: Profile name.
     required: true
   ignore-case:
     description: "Ignoring case(boolean, default: true)"
@@ -14,20 +14,20 @@ runs:
   steps:
     - name: Run
       env:
-        WORD: ${{ inputs.word }}
+        PROFILE: ${{ inputs.profile }}
         IGNORE_CASE: ${{ inputs.ignore-case }}
       shell: bash
       run: |
-        declare word
-        if [[ -z "${WORD}" ]] ; then
+        declare profile
+        if [[ -z "${PROFILE}" ]] ; then
           exit 1
         elif [[ -z "${IGNORE_CASE}" || "${IGNORE_CASE}" == "true" ]] ; then
-          word="${WORD^^}"
+          profile="${PROFILE^^}"
         else
-          word="${WORD}"
+          profile="${PROFILE}"
         fi
-        env | grep "${word}" | grep -v "^WORD=" | while read line; do
-          key=$(echo "${line}" | cut -d'=' -f1 | sed -e "s/_${word}//g" -e "s/${word}_//g")
+        env | grep "${profile}" | grep -v "^PROFILE=" | while read line; do
+          key=$(echo "${line}" | cut -d'=' -f1 | sed -e "s/_${profile}//g" -e "s/${profile}_//g")
           value=$(echo "${line}" | cut -d'=' -f2-)
           echo "new env ${key}"
           echo "${key}=${value}" >> $GITHUB_ENV
