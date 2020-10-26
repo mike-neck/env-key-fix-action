@@ -1,0 +1,33 @@
+name: env-key-fix-action
+description: Fixes env key removing a specified word.
+branding:
+  icon: edit
+  color: purple
+inputs:
+  word:
+    description: Removing word(string)
+    required: true
+  ignore-case:
+    description: Ignoring case(boolean, default: true)
+runs:
+  using: composite
+  steps:
+    - name: Run
+      env:
+        WORD: ${{ inputs.word }}
+        IGNORE_CASE: ${{ inputs.ignore-case }}
+      shell: bash
+      run: |
+        declare word
+        if [[ -z "${WORD}" ]] ; then
+          exit 1
+        elif [[ -z "${IGNORE_CASE}" || "${IGNORE_CASE}" == "true" ]]
+          word="${WORD^^}"
+        else
+          word="${WORD}"
+        fi
+        env | grep "${word}" | grep -v "^WORD=" | while read line; do
+          key=$(echo "${line}" | cut -d'=' -f1 | sed -e "s/_${word}//g" -e "s/${word}_//g")
+          value=$(echo "${line}" | cut -d'=' -f2-)
+          echo "${key}=${value}" >> $GITHUB_ENV
+        done
