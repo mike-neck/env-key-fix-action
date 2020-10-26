@@ -8,7 +8,7 @@ jobs:
       - name: run action
         uses: "mike-neck/fix-profile-action@main"
         with:
-          word: test
+          profile: test
           ignore-case: true
         env:
           FOO_TEST: foo
@@ -30,7 +30,7 @@ jobs:
       - name: run action
         uses: "mike-neck/fix-profile-action@main"
         with:
-          word: test
+          profile: test
           ignore-case: true
         env:
           TEST_FOO: foo
