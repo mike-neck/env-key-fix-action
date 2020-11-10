@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: run action
-        uses: "mike-neck/fix-profile-action@main"
+        uses: "mike-neck/env-selector-action@main"
         with:
           profile: test
           ignore-case: true
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: run action
-        uses: "mike-neck/fix-profile-action@main"
+        uses: "mike-neck/env-selector-action@main"
         with:
           profile: test
           ignore-case: true
